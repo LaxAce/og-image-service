@@ -4,12 +4,12 @@ export const generateOgImageService = async (url: string): Promise<string | null
     console.log("xxxxxx inside generateOgImageService", process.env.PUPPETEER_EXECUTABLE_PATH)
 
     const browser = await puppeteer.launch({
-        args: [
-            "--no-sandbox",
-            "--disable-setuid-sandbox",
-            "--single-process",
-            "--no-zygote",
-        ],
+        // args: [
+        //     "--no-sandbox",
+        //     "--disable-setuid-sandbox",
+        //     "--single-process",
+        //     "--no-zygote",
+        // ],
         executablePath: process.env.PUPPETEER_EXECUTABLE_PATH
     });
 
