@@ -1,7 +1,7 @@
 import puppeteer, { Page } from "puppeteer";
 
 export const generateOgImageService = async (url: string): Promise<string | null> => {
-    console.log("xxxxxx inside generateOgImageService", process.env.NODE_ENV)
+    console.log("xxxxxx inside generateOgImageService", process.env.PUPPETEER_EXECUTABLE_PATH)
 
     const browser = await puppeteer.launch({
         args: [
@@ -10,9 +10,7 @@ export const generateOgImageService = async (url: string): Promise<string | null
             "--single-process",
             "--no-zygote",
         ],
-        executablePath: process.env.NODE_ENV === "production" ?
-            process.env.PUPPETEER_EXECUTABLE_PATH :
-            puppeteer.executablePath(),
+        executablePath: process.env.PUPPETEER_EXECUTABLE_PATH
     });
 
     console.log("xxxxxx process.env.NODE_ENV", process.env.NODE_ENV)
