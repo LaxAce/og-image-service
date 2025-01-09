@@ -1,6 +1,8 @@
 import puppeteer, { Page } from "puppeteer";
 
 export const generateOgImageService = async (url: string): Promise<string | null> => {
+    console.log("xxxxxx inside generateOgImageService", process.env.NODE_ENV)
+
     const browser = await puppeteer.launch({
         args: [
             "--no-sandbox",
