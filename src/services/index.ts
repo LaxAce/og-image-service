@@ -1,7 +1,21 @@
 import puppeteer, { Page } from "puppeteer";
 
 export const generateOgImageService = async (url: string): Promise<string | null> => {
-    const browser = await puppeteer.launch(); //     const browser = await puppeteer.launch({ headless: true });
+    const browser = await puppeteer.launch({
+        args: [
+            "--no-sandbox",
+            "--disable-setuid-sandbox",
+            "--single-process",
+            "--no-zygote",
+        ],
+        executablePath: process.env.NODE_ENV === "production" ?
+            process.env.PUPPETEER_EXECUTABLE_PATH :
+            puppeteer.executablePath(),
+    });
+
+    console.log("xxxxxx process.env.NODE_ENV", process.env.NODE_ENV)
+
+    //     const browser = await puppeteer.launch({ headless: true });
 
 
     console.log('xxxxxxx launchedddd')
