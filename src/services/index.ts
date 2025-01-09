@@ -1,7 +1,10 @@
 import puppeteer, { Page } from "puppeteer";
 
 export const generateOgImageService = async (url: string): Promise<string | null> => {
-    const browser = await puppeteer.launch({ headless: true });
+    const browser = await puppeteer.launch(); //     const browser = await puppeteer.launch({ headless: true });
+
+
+    console.log('xxxxxxx launchedddd')
 
     const page = await browser.newPage();
 
@@ -9,11 +12,14 @@ export const generateOgImageService = async (url: string): Promise<string | null
         await page.setViewport({ width: 1200, height: 630 });
 
         try {
-            await page.goto(url, { waitUntil: 'networkidle2', timeout: 60000 });
+            await page.goto(url); // page.goto(url, { waitUntil: 'networkidle2', timeout: 60000 });
         } catch (navigationError: any) {
             console.error(`Navigation to ${url} failed: ${navigationError.message}`);
             return null;
         }
+
+        console.log('xxxxxxx gotooooooo')
+
 
         await page.waitForFunction("true", { timeout: 60000 });
 
