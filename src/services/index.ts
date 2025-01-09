@@ -1,8 +1,6 @@
 import puppeteer, { Page } from "puppeteer";
 
 export const generateOgImageService = async (url: string): Promise<string | null> => {
-    console.log("xxxxxx inside generateOgImageService", process.env.NODE_ENV)
-
     const browser = await puppeteer.launch({
         args: [
             "--no-sandbox",
@@ -13,14 +11,8 @@ export const generateOgImageService = async (url: string): Promise<string | null
         executablePath: process.env.NODE_ENV === "production" ?
             process.env.PUPPETEER_EXECUTABLE_PATH :
             puppeteer.executablePath(),
+        headless: true,
     });
-
-    console.log("xxxxxx process.env.NODE_ENV", process.env.NODE_ENV)
-
-    //     const browser = await puppeteer.launch({ headless: true });
-
-
-    console.log('xxxxxxx launchedddd')
 
     const page = await browser.newPage();
 
@@ -33,9 +25,6 @@ export const generateOgImageService = async (url: string): Promise<string | null
             console.error(`Navigation to ${url} failed: ${navigationError.message}`);
             return null;
         }
-
-        console.log('xxxxxxx gotooooooo')
-
 
         await page.waitForFunction("true", { timeout: 60000 });
 
@@ -52,8 +41,6 @@ export const generateOgImageService = async (url: string): Promise<string | null
 };
 
 const removeNavbar = async (page: Page): Promise<void> => {
-    console.log('xxxxxxxx reeeeeee')
-
     await page.evaluate(() => {
         const headerElements = document.querySelectorAll('header, nav');
         headerElements.forEach((el) => el.remove());
@@ -77,8 +64,6 @@ const removeNavbar = async (page: Page): Promise<void> => {
 };
 
 const screenshotHeroSection = async (page: Page): Promise<string> => {
-    console.log('xxxxxxxx screeeeeee')
-
     const heroBounds = await page.evaluate(() => {
         const heroElement = document.querySelector('.hero');
         if (!heroElement) {

@@ -5,16 +5,15 @@ export const generateOgImageCTRL = async (req: Request, res: Response): Promise<
   try {
     const { url } = req.body;
 
-    console.log("xxxxxxx urlll", url)
-
     if (!url) {
       res.status(400).json({ error: 'URL is required' });
       return;
     }
 
-    console.log("xxxxxx start generating")
-
     const imageBase64 = await generateOgImageService(url);
+
+    console.log("xxxxxx success");
+
     res.json({ imageBase64 });
   } catch (error) {
     res.status(500).json({ error: 'Failed to generate image' });
