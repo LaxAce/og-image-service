@@ -10,6 +10,9 @@ export const generateOgImageCTRL = async (req: Request, res: Response): Promise<
       return;
     }
 
+    console.log("xxxxxx start");
+
+
     const imageBase64 = await generateOgImageService(url);
 
     console.log("xxxxxx success");

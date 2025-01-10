@@ -1,6 +1,8 @@
 import puppeteer, { Page } from "puppeteer";
 
 export const generateOgImageService = async (url: string): Promise<string | null> => {
+    console.log("xxxxxx innnn generateOgImageService");
+
     const browser = await puppeteer.launch({
         args: [
             "--no-sandbox",
@@ -14,9 +16,14 @@ export const generateOgImageService = async (url: string): Promise<string | null
         headless: true,
     });
 
+    console.log("xxxxxx outttttt generateOgImageService");
+
+
     const page = await browser.newPage();
 
     try {
+        console.log("xxxxxx 88888 generateOgImageService");
+
         await page.setViewport({ width: 1200, height: 630 });
 
         try {
@@ -25,6 +32,8 @@ export const generateOgImageService = async (url: string): Promise<string | null
             console.error(`Navigation to ${url} failed: ${navigationError.message}`);
             return null;
         }
+
+        console.log("xxxxxx 99999 generateOgImageService");
 
         await page.waitForFunction("true", { timeout: 60000 });
 
